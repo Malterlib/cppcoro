@@ -178,7 +178,7 @@ cppcoro::detail::win32::safe_handle cppcoro::file::open(
 		};
 	}
 
-	return std::move(fileHandle);
+	return fileHandle;
 }
 
 #elif CPPCORO_OS_LINUX

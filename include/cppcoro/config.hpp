@@ -87,6 +87,7 @@
 #  define _WIN32_WINNT 0x0A00
 # endif
 # define CPPCORO_OS_WINNT _WIN32_WINNT
+#include <sdkddkver.h>
 #else
 # define CPPCORO_OS_WINNT 0
 #endif

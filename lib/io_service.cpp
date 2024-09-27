@@ -458,7 +458,7 @@ void cppcoro::io_service::stop() noexcept
 
 void cppcoro::io_service::reset()
 {
-	const auto oldState = m_threadState.fetch_and(~stop_requested_flag, std::memory_order_relaxed);
+	[[maybe_unused]] const auto oldState = m_threadState.fetch_and(~stop_requested_flag, std::memory_order_relaxed);
 
 	// Check that there were no active threads running the event loop.
 	assert(oldState == stop_requested_flag);
@@ -949,11 +949,11 @@ void cppcoro::io_service::timer_thread_state::run() noexcept
 				// amount of time to wait until the next timer is ready.
 				if (earliestDueTime != lastSetWaitEventTime)
 				{
-					using ticks = std::chrono::duration<LONGLONG, std::ratio<1, 10'000'000>>;
-
 					auto timeUntilNextDueTime = earliestDueTime - currentTime;
 
  #if CPPCORO_OS_WINNT
+					using ticks = std::chrono::duration<LONGLONG, std::ratio<1, 10'000'000>>;
+
 					// Negative value indicates relative time.
 					LARGE_INTEGER dueTime;
 					dueTime.QuadPart = -std::chrono::duration_cast<ticks>(timeUntilNextDueTime).count();

@@ -157,7 +157,7 @@ namespace cppcoro
 
 			inline_always void *operator new(std::size_t _Size, std::align_val_t _Alignment)
 			{
-				return NMib::NMemory::fg_AllocAligned(_Size, (mint)_Alignment);
+				return NMib::NMemory::fg_AllocAligned(_Size, (umint)_Alignment);
 			}
 
 			inline_always void operator delete(void *_pMemory, std::size_t _Size, std::align_val_t _Alignment)
